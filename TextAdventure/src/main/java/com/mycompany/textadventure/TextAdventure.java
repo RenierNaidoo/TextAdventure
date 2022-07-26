@@ -12,6 +12,8 @@ package com.mycompany.textadventure;
 public class TextAdventure {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        StartMenu start = new StartMenu();
+        start.setLocationRelativeTo(null);
+        start.setVisible(true);
     }
 }
