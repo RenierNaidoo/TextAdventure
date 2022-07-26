@@ -4,10 +4,6 @@
  */
 package com.mycompany.textadventure;
 
-/**
- *
- * @author Maxine Van Der Merwe
- */
 public class StartMenu extends javax.swing.JFrame {
 
     /**
