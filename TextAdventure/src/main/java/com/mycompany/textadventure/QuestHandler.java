@@ -15,20 +15,24 @@ public class QuestHandler {
     
     private Quest current;
     private ArrayList<Quest> allQuests;
-    
+    private int flag;
+    //private boolean flagSet;
+   
     public QuestHandler(Quest q){
         current = q;
+        flag = 0;
+        //flagSet = false;
     }
     
     //Retrieves next step's output or relays error message
     public String NextStep(String in)
     {
         String output = current.NextStep(in);
-        //This section would handle specific actions to be taken at certain stages
-        //For example, changing player attributes, assigning items, etc.
+        
         if(output.equals("Incorrect")){
             output = "That input is not valid. Try again";
         }
+        flag = current.getFlag();
         return output;
     }
     
@@ -40,5 +44,9 @@ public class QuestHandler {
                 current = allQuests.get(i);
             }
         }
+    }
+    public int getFlag()
+    {
+        return flag;
     }
 }

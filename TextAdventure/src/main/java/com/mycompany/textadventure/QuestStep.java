@@ -8,7 +8,7 @@ import java.util.Hashtable;
 
 public class QuestStep {
     private int ID;
-    private String flag;
+    private int flag;
     private String description;
     private Hashtable<String, Integer> triggers;
     
@@ -17,7 +17,7 @@ public class QuestStep {
         triggers = new Hashtable<>();
         String[] items = step.split("#");
         ID = Integer.parseInt(items[0]);
-        flag = items[1];
+        flag = Integer.parseInt(items[1]);
         description = items[2];
         int counter = 3;
         while(counter<items.length){
@@ -30,7 +30,7 @@ public class QuestStep {
         return ID;
     }
 
-    public String getFlag() {
+    public int getFlag() {
         return flag;
     }
 

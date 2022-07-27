@@ -8,16 +8,22 @@ package com.mycompany.textadventure;
 public class MainGUI extends javax.swing.JFrame {
 
     private QuestHandler handler;
+    private Player PC;
     
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
+        //Tutorial quest to test funcionality
         Quest tutorial = new Quest(100, "Tutorial", "Tutorial to introduce the game");
         tutorial.AddStep("0#0#Initialize##100");
         tutorial.AddStep("100#0#Press Enter to proceed to next step##200");
-        tutorial.AddStep("200#0#Well Done! Press quit to exit##9999");
+        tutorial.AddStep("200#0#Choose a class: Warrior/Rogue/Wizard#Warrior#300#Rogue#400#Wizard#500");
+        tutorial.AddStep("300#1#Press Enter to proceed to next step##600");
+        tutorial.AddStep("400#2#Press Enter to proceed to next step##600");
+        tutorial.AddStep("500#3#Press Enter to proceed to next step##600");
+        tutorial.AddStep("600#4#Well Done! Your stats are displayed below. Press quit to exit##9999");
         handler = new QuestHandler(tutorial);
         txtfOutput.setText(handler.NextStep(""));
         txtfOutput.append("\n");
@@ -140,11 +146,51 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterActionPerformed
         String input = txtfInput.getText();
+        txtfInput.setText("");
         String output = handler.NextStep(input);
         txtfOutput.append(output);
         txtfOutput.append("\n");
+        System.out.println(handler.getFlag());
+        if(handler.getFlag() != 0)
+        {
+            ExecuteFlag(handler.getFlag());
+        }
+        
     }//GEN-LAST:event_btnEnterActionPerformed
-
+    
+    //Displays the player character's stats
+    public void DisplayStats()
+    {
+        if(PC != null)
+        {
+            txtfStats.setText(PC.Stats());
+        }
+    }
+    
+    //General function that executes flags provided by the quest steps via the quest handler
+    public void ExecuteFlag(int flag){
+        Player pc;
+        switch (flag) {
+            case 1:
+                pc = new Player("Name", flag);
+                PC = pc;
+                break;
+            case 2:
+                pc = new Player("Name", flag);
+                PC = pc;
+                break;
+            case 3:
+                pc = new Player("Name", flag);
+                PC = pc;
+                break;
+            case 4:
+                DisplayStats();
+                break;
+            default:
+              throw new AssertionError();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

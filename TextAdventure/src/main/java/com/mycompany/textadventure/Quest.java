@@ -13,6 +13,7 @@ public class Quest {
     private String description;
     private ArrayList<QuestStep> qSteps;
     private QuestStep current;
+    private int flag;
 
     public Quest(int id, String t, String d) {
         ID = id;
@@ -47,6 +48,7 @@ public class Quest {
                     }
                 }
                 output = current.getDescription();
+                flag = current.getFlag();
             }
         }
         return output;
@@ -63,5 +65,12 @@ public class Quest {
     public String getDescription() {
         return description;
     }
-
+    
+    public int getFlag() {
+        return flag;
+    }
+    
+    public void setFlag(int f){
+        flag = f;
+    }
 }
