@@ -14,6 +14,7 @@ public class Quest {
     private ArrayList<QuestStep> qSteps;
     private QuestStep current;
     private int flag;
+    private String flagInfo;
 
     public Quest(int id, String t, String d) {
         ID = id;
@@ -48,6 +49,7 @@ public class Quest {
                     }
                 }
                 output = current.getDescription();
+                flagInfo = current.getFlagInfo();
                 flag = current.getFlag();
             }
         }
@@ -60,6 +62,10 @@ public class Quest {
 
     public String getTitle() {
         return title;
+    }
+    
+    public String getFlagInfo(){
+        return flagInfo;
     }
 
     public String getDescription() {

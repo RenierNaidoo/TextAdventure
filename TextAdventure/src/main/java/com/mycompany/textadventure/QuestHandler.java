@@ -16,6 +16,7 @@ public class QuestHandler {
     private Quest current;
     private ArrayList<Quest> allQuests;
     private int flag;
+    private String flagInfo;
     //private boolean flagSet;
    
     public QuestHandler(Quest q){
@@ -33,6 +34,7 @@ public class QuestHandler {
             output = "That input is not valid. Try again";
         }
         flag = current.getFlag();
+        flagInfo = current.getFlagInfo();
         return output;
     }
     
@@ -48,5 +50,9 @@ public class QuestHandler {
     public int getFlag()
     {
         return flag;
+    }
+    
+    public String getFlagInfo(){
+        return flagInfo;
     }
 }

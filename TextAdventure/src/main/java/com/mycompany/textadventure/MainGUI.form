@@ -26,24 +26,17 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="btnQuit" pref="77" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtfInput" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnEnter" max="32767" attributes="0"/>
-                          <Component id="btnSave" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnOptions" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btnJournal" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jScrollPane1" pref="313" max="32767" attributes="0"/>
+                  <Component id="txtfInput" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnQuit" max="32767" attributes="0"/>
+                  <Component id="btnSave" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnOptions" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnJournal" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnEnter" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

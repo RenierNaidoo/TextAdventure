@@ -9,6 +9,7 @@ import java.util.Hashtable;
 public class QuestStep {
     private int ID;
     private int flag;
+    private String flagInfo;
     private String description;
     private Hashtable<String, Integer> triggers;
     
@@ -18,8 +19,9 @@ public class QuestStep {
         String[] items = step.split("#");
         ID = Integer.parseInt(items[0]);
         flag = Integer.parseInt(items[1]);
-        description = items[2];
-        int counter = 3;
+        flagInfo = items[2];
+        description = items[3];
+        int counter = 4;
         while(counter<items.length){
             triggers.put(items[counter], Integer.parseInt(items[counter+1]));
             counter += 2;
@@ -38,11 +40,17 @@ public class QuestStep {
         return description;
     }
     
+    public String getFlagInfo(){
+        return flagInfo;
+    }
+    
     //gets the next step, else returns -1 to denote failure
     public int getNext(String t){
         int next;
         if(triggers.containsKey(t)){
             next = triggers.get(t);
+        }else if(flag == 9999){// Special ignore flag to proceed to next step regrdless
+            next = triggers.get("");
         }else{
            next = -1; 
         }

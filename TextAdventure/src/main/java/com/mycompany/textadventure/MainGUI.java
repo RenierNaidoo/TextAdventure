@@ -9,6 +9,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private QuestHandler handler;
     private Player PC;
+    private String input;
+    private String name;
     
     /**
      * Creates new form MainGUI
@@ -17,13 +19,14 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         //Tutorial quest to test funcionality
         Quest tutorial = new Quest(100, "Tutorial", "Tutorial to introduce the game");
-        tutorial.AddStep("0#0#Initialize##100");
-        tutorial.AddStep("100#0#Press Enter to proceed to next step##200");
-        tutorial.AddStep("200#0#Choose a class: Warrior/Rogue/Wizard#Warrior#300#Rogue#400#Wizard#500");
-        tutorial.AddStep("300#1#Press Enter to proceed to next step##600");
-        tutorial.AddStep("400#2#Press Enter to proceed to next step##600");
-        tutorial.AddStep("500#3#Press Enter to proceed to next step##600");
-        tutorial.AddStep("600#4#Well Done! Your stats are displayed below. Press quit to exit##9999");
+        tutorial.AddStep("0#0##Initialize##100");
+        tutorial.AddStep("100#0##Press Enter to proceed to next step##200");
+        tutorial.AddStep("200#9999##Please enter a name for your character##300");
+        tutorial.AddStep("300#5##choose a class: Warrior/Rogue/Wizard#Warrior#400#Rogue#500#Wizard#600");
+        tutorial.AddStep("400#1##Press Enter to proceed to next step##700");
+        tutorial.AddStep("500#2##Press Enter to proceed to next step##700");
+        tutorial.AddStep("600#3##Press Enter to proceed to next step##700");
+        tutorial.AddStep("700#4##Well Done! Your stats, _pcName_,are displayed below. Press quit to exit##9999");
         handler = new QuestHandler(tutorial);
         txtfOutput.setText(handler.NextStep(""));
         txtfOutput.append("\n");
@@ -91,20 +94,16 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnQuit, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfInput, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEnter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnOptions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnJournal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                    .addComponent(txtfInput)
+                    .addComponent(jScrollPane2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnQuit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOptions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnJournal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEnter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,9 +144,10 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuitActionPerformed
 
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterActionPerformed
-        String input = txtfInput.getText();
+        input = txtfInput.getText();
         txtfInput.setText("");
         String output = handler.NextStep(input);
+        output = EvalOutput(output);
         txtfOutput.append(output);
         txtfOutput.append("\n");
         System.out.println(handler.getFlag());
@@ -172,23 +172,37 @@ public class MainGUI extends javax.swing.JFrame {
         Player pc;
         switch (flag) {
             case 1:
-                pc = new Player("Name", flag);
+                pc = new Player(name, flag);
                 PC = pc;
                 break;
             case 2:
-                pc = new Player("Name", flag);
+                pc = new Player(name, flag);
                 PC = pc;
                 break;
             case 3:
-                pc = new Player("Name", flag);
+                pc = new Player(name, flag);
                 PC = pc;
                 break;
             case 4:
                 DisplayStats();
                 break;
+            case 5:
+                name = input;
+                break;
             default:
               throw new AssertionError();
         }
+    }
+    
+    /*
+    This function is used to replace string markers with the correct output. 
+    */
+    public String EvalOutput(String output){
+        String o = output;
+        if(o.contains("_pcName_")){
+            o = o.replaceAll("_pcName_", PC.getName());
+        }
+        return o;
     }
     
     /**
